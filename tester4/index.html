@@ -1,0 +1,34 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>chunk isolation</title></head><body>
+<div id="d" style="font:13px monospace;padding:8px;white-space:pre-wrap;word-break:break-all"></div>
+<script>
+var d=document.getElementById('d');
+function L(m){d.innerHTML+=m+'<br>';}
+L('v7 chunk-by-chunk test');
+var chunks=[
+  '/lecture-slides/tester/assets/rolldown-runtime-S-ySWqyJ.js',
+  '/lecture-slides/tester/assets/_plugin-vue_export-helper-BOai-rQB.js',
+  '/lecture-slides/tester/assets/modules/shiki-BiiZU2CK.js',
+  '/lecture-slides/tester/assets/modules/vue-e-c8wyLS.js',
+  '/lecture-slides/tester/assets/slidev/context-BuqXt4uc.js',
+  '/lecture-slides/tester/assets/slidev/useNav-CTcdaSxF.js',
+  '/lecture-slides/tester/assets/syncState-AiB7UhEa.js',
+  '/lecture-slides/tester/assets/index-BEt6AARc.js'
+];
+(async function(){
+  for(var i=0;i<chunks.length;i++){
+    var c=chunks[i];
+    try{
+      var t0=Date.now();
+      await import(c);
+      L('OK ['+(Date.now()-t0)+'ms]: '+c.split('/').pop());
+    }catch(e){
+      L('FAIL: '+c.split('/').pop()+' :: '+(e&&(e.message||e.toString())));
+      L('  stack: '+(e&&e.stack));
+      break;
+    }
+  }
+  L('done');
+})();
+</script>
+</body></html>
