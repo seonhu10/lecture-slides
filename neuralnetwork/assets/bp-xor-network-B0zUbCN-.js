@@ -1,0 +1,1 @@
+var e=`/lecture-slides/neuralnetwork/assets/bp-xor-network-CZwHYt0Y.png`;export{e as t};

@@ -1,0 +1,1 @@
+var e=`/lecture-slides/neuralnetwork/assets/single-hidden-layer-BBCC8x2O.png`;export{e as t};
