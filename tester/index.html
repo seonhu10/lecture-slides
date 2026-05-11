@@ -20,26 +20,33 @@
   <link rel="stylesheet" href="/lecture-slides/tester/assets/index-Q9VLf6jy.css">
 </head>
 <body>
-<div id="__diag" style="position:fixed;top:0;left:0;right:0;background:#fff;color:#000;font:14px/1.4 monospace;padding:8px;border-bottom:2px solid #c00;z-index:99999;max-height:60vh;overflow:auto;">
-loading...
+<div id="__diag" style="position:fixed;top:0;left:0;right:0;background:#fff;color:#000;font:12px/1.4 monospace;padding:8px;border-bottom:2px solid #c00;z-index:99999;max-height:70vh;overflow:auto;white-space:pre-wrap;word-break:break-all;">
+diag v5
 </div>
 <script>
 (function(){
   var d = document.getElementById('__diag');
-  function log(msg){ d.innerHTML += '<br>' + msg; }
-  log('1. inline script ran');
-  window.addEventListener('error', function(e){
-    log('ERROR: ' + (e.message || e.error || e.type) + ' @ ' + (e.filename || '?') + ':' + (e.lineno || '?'));
-  }, true);
+  function log(msg){ d.innerHTML += '
+' + msg; }
+  log('1. inline ran. UA: ' + navigator.userAgent.substring(0, 80));
+  window.onerror = function(message, source, lineno, colno, error){
+    log('ONERROR: msg=' + message + ' | src=' + source + ' | line=' + lineno + ':' + colno + ' | err=' + (error && (error.message || error.stack || error.toString())));
+  };
   window.addEventListener('unhandledrejection', function(e){
-    log('UNHANDLED REJECTION: ' + (e.reason && (e.reason.message || e.reason)));
+    var r = e.reason;
+    log('REJECT: ' + (r && (r.stack || r.message || r.toString())));
   });
-  document.addEventListener('DOMContentLoaded', function(){ log('2. DOMContentLoaded'); });
-  window.addEventListener('load', function(){ log('3. window.load'); setTimeout(function(){ log('4. +2s: slidev present? ' + !!document.querySelector('#slidev')); }, 2000); });
+  // Try direct dynamic import to capture real error
+  var src = "/lecture-slides/tester/assets/index-BEt6AARc.js";
+  log('2. main script src: ' + src);
+  import(src).then(function(m){
+    log('3. import ok: keys=' + Object.keys(m).join(','));
+  }).catch(function(e){
+    log('3. IMPORT FAIL: ' + (e && (e.stack || e.message || e.toString())));
+  });
 })();
 </script>
-
-  <div id="app"></div>
+<div id="app"></div>
   <div id="mermaid-rendering-container"></div>
   
 </body>
