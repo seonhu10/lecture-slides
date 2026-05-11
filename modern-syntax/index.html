@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>modern syntax</title></head>
+<body>
+<h1>before</h1>
+<div id="optional">optional chaining: pending</div>
+<div id="nullish">nullish coalescing: pending</div>
+<div id="logassign">logical assignment: pending</div>
+<div id="error">no error</div>
+<script>
+try {
+  const obj = { a: { b: 7 } };
+  document.getElementById('optional').textContent = 'optional chaining: ' + (obj?.a?.b ?? 'fail');
+
+  const v = null;
+  document.getElementById('nullish').textContent = 'nullish coalescing: ' + (v ?? 'ok');
+
+  let x;
+  x ??= 'ok';
+  document.getElementById('logassign').textContent = 'logical assignment: ' + x;
+} catch (e) {
+  document.getElementById('error').textContent = 'ERROR: ' + e.message;
+}
+</script>
+</body>
+</html>
