@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>module-test</title></head>
+<body>
+<h1>before module</h1>
+<div id="out">module not run</div>
+<script type="module">
+  import { greet } from './lib.js';
+  document.getElementById('out').textContent = greet();
+</script>
+</body>
+</html>

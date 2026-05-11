@@ -1,0 +1,11 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>js-test</title></head>
+<body>
+<h1>before js</h1>
+<div id="out">js not run</div>
+<script>
+  document.getElementById('out').textContent = 'js ran ok: ' + new Date().toISOString();
+</script>
+</body>
+</html>
